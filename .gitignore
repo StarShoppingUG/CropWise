@@ -1,0 +1,52 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub-cache/
+build/
+coverage/
+# Platform-specific build outputs
+/android/local.properties
+/android/.gradle/
+/android/app/build/
+/ios/Pods/
+/ios/DerivedData/
+/ios/.symlinks/
+/macos/Pods/
+/macos/DerivedData/
+/macos/.symlinks/
+/windows/runner/build/
+/windows/flutter/ephemeral/
+/linux/flutter/ephemeral/
+
+# IDEs and editors
+.idea/
+*.iml
+*.ipr
+*.iws
+# Uncomment if you want to ignore VSCode settings
+#.vscode/
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+*.hprof
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# Firebase/Secrets (do not commit these to public repos)
+google-services.json
+GoogleService-Info.plist
+firebase.json
+
+# Java heap dumps
+/android/java_pid*.hprof
+
+lib/secrets.dart
