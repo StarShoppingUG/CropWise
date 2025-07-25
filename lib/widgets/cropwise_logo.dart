@@ -16,7 +16,7 @@ class CropWiseLogo extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withAlpha((0.20 * 255).toInt()),
+                color: Colors.green.withAlpha((0.90 * 255).toInt()),
                 blurRadius: 8,
                 offset: Offset(0, 2),
               ),

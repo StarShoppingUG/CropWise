@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class WeatherUtils {
-  static IconData getWeatherIcon(String description) {
+  static IconData getWeatherIcon(String description, {bool isNight = false}) {
     final desc = description.toLowerCase();
     if (desc.contains('cloud')) {
       return Icons.cloud;
     } else if (desc.contains('clear') || desc.contains('sun')) {
-      return Icons.wb_sunny;
+      return isNight ? Icons.nights_stay : Icons.wb_sunny;
     } else if (desc.contains('rain')) {
       return Icons.umbrella;
     } else if (desc.contains('fog')) {
@@ -40,4 +40,4 @@ class WeatherUtils {
     if (code == 96 || code == 99) return 'Thunderstorm';
     return 'Unknown';
   }
-} 
+}

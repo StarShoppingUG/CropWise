@@ -47,7 +47,7 @@ CropWise is an AI-powered agriculture assistant designed to help farmers optimiz
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/crop_wise.git
+   git clone https://github.com/StarShoppingUG/CropWise.git
    cd crop_wise
    ```
 
@@ -76,6 +76,8 @@ CropWise is an AI-powered agriculture assistant designed to help farmers optimiz
   - `models/` — Data models
   - `utils/` — Utility functions
 - `assets/avatars` — Avatar icons
+- `images/avatars` — App screenshots
+- `poster_image/` — poster images
 - Platform folders: `android/`, `ios/`
 
 
