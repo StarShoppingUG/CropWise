@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 
 class WeatherUtils {
-  static IconData getWeatherIcon(String description, {bool isNight = false}) {
+  static IconData getWeatherIcon(String description, {String? time}) {
     final desc = description.toLowerCase();
+
+    // Determine night or day based on time string if provided
+    bool isNight = false;
+    if (time != null && time.length >= 13) {
+      try {
+        final hour = int.parse(time.substring(11, 13));
+        isNight = hour < 6 || hour >= 19;
+      } catch (_) {
+        isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 19;
+      }
+    } else {
+      isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 19;
+    }
+
     if (desc.contains('cloud')) {
       return Icons.cloud;
     } else if (desc.contains('clear') || desc.contains('sun')) {

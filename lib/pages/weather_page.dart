@@ -489,24 +489,7 @@ class _WeatherPageState extends State<WeatherPage> {
         'uvIndex': (temp / 4).round().clamp(1, 10),
         'icon': WeatherUtils.getWeatherIcon(
           description,
-          isNight:
-              (() {
-                DateTime? dt;
-                if (dayData['date'] != null) {
-                  try {
-                    dt = DateTime.parse(dayData['date']);
-                  } catch (_) {}
-                }
-                if (dt == null && dayData['time'] != null) {
-                  try {
-                    dt = DateTime.parse(dayData['time']);
-                  } catch (_) {}
-                }
-                if (dt != null) {
-                  return dt.hour < 6 || dt.hour >= 19;
-                }
-                return DateTime.now().hour < 6 || DateTime.now().hour >= 19;
-              })(),
+          time: dayData['time'] ?? dayData['date'],
         ),
         'desc': description,
       });
@@ -519,6 +502,7 @@ class _WeatherPageState extends State<WeatherPage> {
   ) {
     final result = <Map<String, dynamic>>[];
     for (final hour in hourlyForecast) {
+      // Extract weather data from hourly forecast
       final time = hour['time'] as String;
       final temperature = hour['temperature']?.toDouble() ?? 25.0;
       final humidity = hour['humidity']?.toDouble() ?? 65.0;
@@ -529,25 +513,14 @@ class _WeatherPageState extends State<WeatherPage> {
       final windSpeed = hour['wind_speed']?.toDouble() ?? 8.0;
       final weathercode = hour['weathercode'] as int?;
 
-      // Get weather description and determine if it's raining
+      // Get weather description
       final description =
           weathercode != null
               ? WeatherUtils.getWeatherDescription(weathercode)
               : 'Clear';
       final isRain = description.toLowerCase().contains('rain');
 
-      bool isNight = false;
-      if (hour['time'] is String && (hour['time'] as String).length >= 13) {
-        try {
-          final hourInt = int.parse((hour['time'] as String).substring(11, 13));
-          isNight = hourInt < 6 || hourInt >= 19;
-        } catch (_) {
-          isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 19;
-        }
-      } else {
-        isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 19;
-      }
-
+      // Format hourly weather data
       result.add({
         'time': time,
         'temperature': temperature,
@@ -560,7 +533,7 @@ class _WeatherPageState extends State<WeatherPage> {
         'weathercode': weathercode,
         'description': description,
         'isRain': isRain,
-        'icon': WeatherUtils.getWeatherIcon(description, isNight: isNight),
+        'icon': WeatherUtils.getWeatherIcon(description, time: time),
       });
     }
     return result;
@@ -862,9 +835,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                             WeatherUtils.getWeatherDescription(
                                               currentHourData?['weathercode'],
                                             ),
-                                            isNight:
-                                                DateTime.now().hour < 6 ||
-                                                DateTime.now().hour >= 19,
+                                            time: currentHourData?['time'],
                                           ),
                                           color: colorScheme.onPrimary,
                                           size: 32,

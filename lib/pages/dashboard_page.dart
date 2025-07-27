@@ -287,20 +287,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           WeatherUtils.getWeatherDescription(
                             currentHourWeather!['weathercode'],
                           ),
-                          isNight:
-                              (() {
-                                final timeStr = currentHourWeather!['time'];
-                                if (timeStr is String && timeStr.length >= 13) {
-                                  try {
-                                    final hour = int.parse(
-                                      timeStr.substring(11, 13),
-                                    );
-                                    return hour < 6 || hour >= 19;
-                                  } catch (_) {}
-                                }
-                                return DateTime.now().hour < 6 ||
-                                    DateTime.now().hour >= 19;
-                              })(),
+                          time: currentHourWeather!['time'],
                         ),
                         location: userLocation ?? '',
                       )),
