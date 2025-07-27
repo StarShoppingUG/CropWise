@@ -61,23 +61,43 @@ class LocationService {
   /// Reverse geocode coordinates to a human-readable address using Nominatim
   static Future<String> getAddressFromCoordinates(LatLng position) async {
     final url = Uri.parse(
-      'https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.latitude}&lon=${position.longitude}&zoom=14&addressdetails=1',
+      'https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.latitude}&lon=${position.longitude}&zoom=18&addressdetails=1',
     );
+
     try {
       final response = await http.get(
         url,
         headers: {'User-Agent': 'CropWise/1.0'},
       );
+
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        if (data['display_name'] != null) {
-          return data['display_name'];
+
+        // Use name (e.g. "Makerere University") if available
+        if (data['name'] != null && data['name'].toString().isNotEmpty) {
+          return data['name'];
+        }
+
+        final address = data['address'];
+        if (address != null) {
+          final parts =
+              [
+                address['road'],
+                address['neighbourhood'],
+                address['suburb'],
+                address['village'],
+                address['town'],
+                address['city'],
+                address['county'],
+                address['state'],
+                address['country'],
+              ].where((part) => part != null).toList();
+
+          return parts.join(', ');
         }
       }
-    } catch (e) {
-      // ignore
-    }
-    // Fallback to coordinates if reverse geocoding fails
+    } catch (_) {}
+
     return 'Location (${position.latitude.toStringAsFixed(4)}, ${position.longitude.toStringAsFixed(4)})';
   }
 }

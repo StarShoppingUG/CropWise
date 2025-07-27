@@ -503,9 +503,9 @@ class _WeatherPageState extends State<WeatherPage> {
                   } catch (_) {}
                 }
                 if (dt != null) {
-                  return dt.hour < 6 || dt.hour >= 18;
+                  return dt.hour < 6 || dt.hour >= 19;
                 }
-                return DateTime.now().hour < 6 || DateTime.now().hour >= 18;
+                return DateTime.now().hour < 6 || DateTime.now().hour >= 19;
               })(),
         ),
         'desc': description,
@@ -540,12 +540,12 @@ class _WeatherPageState extends State<WeatherPage> {
       if (hour['time'] is String && (hour['time'] as String).length >= 13) {
         try {
           final hourInt = int.parse((hour['time'] as String).substring(11, 13));
-          isNight = hourInt < 6 || hourInt >= 18;
+          isNight = hourInt < 6 || hourInt >= 19;
         } catch (_) {
-          isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 18;
+          isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 19;
         }
       } else {
-        isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 18;
+        isNight = DateTime.now().hour < 6 || DateTime.now().hour >= 19;
       }
 
       result.add({
@@ -864,7 +864,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                             ),
                                             isNight:
                                                 DateTime.now().hour < 6 ||
-                                                DateTime.now().hour >= 18,
+                                                DateTime.now().hour >= 19,
                                           ),
                                           color: colorScheme.onPrimary,
                                           size: 32,

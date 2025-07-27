@@ -295,11 +295,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                     final hour = int.parse(
                                       timeStr.substring(11, 13),
                                     );
-                                    return hour < 6 || hour >= 18;
+                                    return hour < 6 || hour >= 19;
                                   } catch (_) {}
                                 }
                                 return DateTime.now().hour < 6 ||
-                                    DateTime.now().hour >= 18;
+                                    DateTime.now().hour >= 19;
                               })(),
                         ),
                         location: userLocation ?? '',

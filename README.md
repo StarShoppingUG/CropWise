@@ -75,9 +75,9 @@ CropWise is an AI-powered agriculture assistant designed to help farmers optimiz
   - `services/` — API, AI, and data services
   - `models/` — Data models
   - `utils/` — Utility functions
-- `assets/avatars` — Avatar icons
-- `images/avatars` — App screenshots
-- `poster_image/` — poster images
+- `assets/avatars/` — Avatar icons
+- `images/` — App screenshots
+- `poster_image/` — poster image
 - Platform folders: `android/`, `ios/`
 
 
